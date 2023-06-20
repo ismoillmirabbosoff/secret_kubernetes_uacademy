@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  labels:
+    app: flask-app
+  name: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+       app: flask-app
+    spec:
+      containers:
+        - image: zeromaxinc/secret_kubernetes_uacademy:latest
+          name: flask-app
+          env:
+
+          - name: HTTP_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: environment
+                key: http_port
+          - name: ENV
+            valueFrom:
+              configMapKeyRef:
+                name: environment
+                key: env
+
+
+
+          - name: TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: payme
+                key: token
+          - name: ADDRESS
+            valueFrom:
+              secretKeyRef:
+                name: payme
+                key: address
+
+
+
+
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+

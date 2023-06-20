@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  env: development
+  http_port: "80"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: environment
+  namespace: default
