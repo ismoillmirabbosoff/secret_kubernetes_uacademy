@@ -21,10 +21,10 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     
     - name: Build the Docker image
-      run: docker build -t users . && docker tag users zeromaxinc/users 
+      run: docker build -t secret_kubernetes_uacademy . && docker tag secret_kubernetes_uacademy zeromaxinc/secret_kubernetes_uacademy 
   
     - name: Docker push
-      run: docker push zeromaxinc/users
+      run: docker push zeromaxinc/secret_kubernetes_uacademy
 
     - name: Configuration Git
       run: git config --global user.email "zeromax.adm@gmail.com" && git config --global user.name "quantumitllc"
